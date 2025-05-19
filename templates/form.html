@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="margin-top: 30px;">
+    <form method="POST">{% csrf_token %}
+        <div>
+            <label for="summary">Summary</label>
+            <input type="text" name="summary" placeholder="summary">
+        </div>
+
+        <div style="margin-top: 30px;">
+            <label for="description">Description</label>
+            <input type="text" name="description" placeholder="description">
+        </div>
+
+        <div style="margin-top: 30px;">
+            <label for="time">Time</label>
+            <input type="time" name="time" placeholder="Time">
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button type="submit">Create</button>
+        </div>
+    </form>
+
+    <p>Want to <a href="/login/">logout?</a></p>
+</div>
+
+<h2>Todo List</h2>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+
+<table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <th>Summary</th>
+        <th>Description</th>
+        <th>Time</th>
+        <th>Completed</th>
+        <th>Actions</th>
+    </tr>
+    {% for item in all_data %}
+    <tr {% if item.iscomplete %} style="background-color: #d4edda;" {% endif %}>
+        <td>{{ item.summary }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.TIme }}</td>
+        <td>{{ item.iscomplete }}</td>
+        <td>
+            <a href="{% url 'update_todo' item.id %}">Edit</a> |
+            <a href="{% url 'delete_todo' item.id %}">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No todos found.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

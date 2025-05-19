@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <div style="margin-top: 30px;">
+    <form method="post"">{% csrf_token %}
+         {% if error %}
+    <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        <div>
+            <div>
+                <h1>login page  </h1>
+            </div>
+            <input type="text" name="username" placeholder="username">
+        </div style="margin-top: 30px;">
+        
+        <div style="margin-top: 30px;">
+            <input type="password" name="password" placeholder="password">
+        </div > 
+        <div style="margin-top: 30px;">  
+        <button type="submit"> login</button>
+        </div> 
+
+        <p>Dont have an account ? <a href="/register/">register</a></p>
+        <p>Go to <a href="/">Home</a></p>
+    </form>
+ </div>
+
+
+{% endblock %}

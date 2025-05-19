@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Update Todo</title>
+    <style>
+        .completed-field {
+            background-color: lightgreen;
+        }
+        input[type="text"], input[type="time"] {
+            padding: 8px;
+            margin-bottom: 15px;
+            width: 300px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        button {
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Update Todo</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="summary">Summary:</label>
+    <input
+        type="text"
+        id="summary"
+        name="summary"
+        value="{{ todo.summary }}"
+        class="{% if todo.iscomplete %}completed-field{% endif %}"
+    >
+
+    <label for="description">Description:</label>
+    <input
+        type="text"
+        id="description"
+        name="description"
+        value="{{ todo.description }}"
+        class="{% if todo.iscomplete %}completed-field{% endif %}"
+    >
+
+    <label for="time">Time:</label>
+    <input
+        type="time"
+        id="time"
+        name="time"
+        value="{{ todo.TIme|time:'H:i' }}"
+        class="{% if todo.iscomplete %}completed-field{% endif %}"
+    >
+
+    <label for="iscomplete">
+        <input
+            type="checkbox"
+            id="iscomplete"
+            name="iscomplete"
+            {% if todo.iscomplete %}checked{% endif %}
+        >
+        Completed
+    </label>
+
+    <button type="submit">Update</button>
+</form>
+
+</body>
+</html>
