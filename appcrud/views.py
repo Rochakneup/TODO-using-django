@@ -88,4 +88,7 @@ def update_todo(request, id):
 
     return render(request, "updateform.html", {"todo": todo})
 
+
+def index_view(request):
+    return render (request, 'index.html')
    

@@ -14,9 +14,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from os import stat
 from django.contrib import admin
 from django.urls import path
-from appcrud.views import home_view ,login_view , register_view ,todo_view , delete_todo , update_todo
+from appcrud.views import index_view, home_view ,login_view , register_view ,todo_view , delete_todo , update_todo
+from formcrud import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +28,5 @@ urlpatterns = [
     path('form', todo_view , name = "form"),
     path('delete/<int:id>/', delete_todo, name='delete_todo'),
     path('update/<int:id>/', update_todo, name='update_todo'),
-
+    path('index/', index_view),
 ]
