@@ -16,9 +16,10 @@ Including another URLconf
 """
 from os import stat
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from appcrud.views import index_view, home_view ,login_view , register_view ,todo_view , delete_todo , update_todo
 from formcrud import settings
+from classform.views import my_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +30,9 @@ urlpatterns = [
     path('delete/<int:id>/', delete_todo, name='delete_todo'),
     path('update/<int:id>/', update_todo, name='update_todo'),
     path('index/', index_view),
+    
+    #class based url
+    path('cls/',my_view.as_view() , name="class"),
+    path('books/',include('classform.urls', namespace = 'classform')),
+
 ]
