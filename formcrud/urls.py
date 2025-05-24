@@ -20,6 +20,7 @@ from django.urls import include, path
 from appcrud.views import index_view, home_view ,login_view , register_view ,todo_view , delete_todo , update_todo
 from formcrud import settings
 from classform.views import my_view
+from school.views import StudentListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,5 +35,6 @@ urlpatterns = [
     #class based url
     path('cls/',my_view.as_view() , name="class"),
     path('books/',include('classform.urls', namespace = 'classform')),
+    path('student/',StudentListView.as_view(), name='student'),
 
 ]
